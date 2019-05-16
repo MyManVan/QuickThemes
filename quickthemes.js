@@ -1,5 +1,5 @@
 window.addEventListener('load', function() {
-  console.log("loaded");
+  console.log("Loaded QuickThemes");
 });
 
 function addCss(styleSheet) {
@@ -13,5 +13,5 @@ function addCss(styleSheet) {
   head.appendChild(link);
 }
 
-const retrowave = chrome.extension.getURL("css/retrowave.css");
+const retrowave = chrome.extension.getURL("themes/retrowave/retrowave.css");
 addCss(retrowave);
