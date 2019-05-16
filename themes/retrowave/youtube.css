@@ -1,0 +1,210 @@
+/* i really want this to be global */
+@font-face {
+	font-family: Streamster;
+	src: url(https://vaborgabe.github.io/web/fonts/Streamster.ttf) format('truetype');
+}
+@font-face {
+	font-family: VCROSDMono;
+	src: url(https://vaborgabe.github.io/web/fonts/VCROSDMono.ttf) format('truetype');
+}
+@font-face {
+	font-family: SF-AlienIntrudersSolid;
+	src: url(https://vaborgabe.github.io/web/fonts/SFAlienEncountersSolid.ttf) format('truetype');
+}
+@font-face {
+	font-family: Vogue;
+	src: url(https://vaborgabe.github.io/web/fonts/Vogue.ttf) format('truetype');
+}
+@font-face {
+	font-family: FortySeven;
+	src: url(https://vaborgabe.github.io/web/fonts/47-BoldItalic.ttf) format('truetype');
+}
+@font-face {
+	font-family: Lazer84;
+	src: url(https://vaborgabe.github.io/web/fonts/Lazer84.ttf) format('truetype');
+}
+
+ytd-masthead {
+	background-color: #FFA1F1 !important;
+}
+
+ytd-mini-guide-renderer {
+	background-color: #258EA6 !important;
+}
+
+ytd-mini-guide-entry-renderer {
+	background-color: #258EA6 !important;
+}
+
+yt-icon {
+	color: #FFA1F1 !important;
+}
+
+span.ytd-mini-guide-entry-renderer {
+	color: #FFA1F1 !important;
+}
+
+ytd-app {
+	background-color: transparent!important;
+}
+
+ytd-app::after {
+    content: "";
+    background: url("https://wallpapertag.com/wallpaper/full/5/e/0/133956-cool-vaporwave-wallpaper-1920x1080-1920x1080-cell-phone.jpg")!important;
+    background-repeat: no-repeat;
+    background-size: cover!important;
+    opacity: 0.5;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: fixed;
+    z-index: -1;
+		height: 100vh;
+		width: 100%;
+}
+
+#meta {
+	background-color: #258EA6!important;
+	padding: 5px!important;
+}
+#meta a, span {
+	color: #FFA1F1!important;
+}
+
+#details {
+	background-color: #258EA6!important;
+	padding: 5px!important;
+}
+
+ytd-item-section-renderer.ytd-section-list-renderer {
+	border-bottom: 2px solid #258EA6!important;
+/*	box-shadow: 0px 10px 2px 2px #FFA1F1!important;*/
+}
+
+div#image-container {
+	color: #258EA6!important;
+	padding: 0px 2.5px!important;
+	font-family: FortySeven;
+	font-size: 4rem!important;
+	max-height: 4rem!important;
+	line-height: 4rem!important;
+	text-shadow: 2px 2px 5px #FFA1F1!important;
+}
+
+yt-formatted-string {
+	color: #258EA6!important;
+	font-family: SF-AlienIntrudersSolid!important;
+	text-shadow: 2px 2px 5px #FFA1F1!important;
+}
+
+yt-formatted-string.style-scope.ytd-subscribe-button-renderer {
+	color: #FFA1F1!important;
+	font-family: SF-AlienIntrudersSolid!important;
+}
+
+yt-formatted-string#text.style-scope.ytd-button-renderrer.style-blue-text.size-default {
+	color: #FFA1F1!important;
+	font-family: SF-AlienIntrudersSolid!important;
+}
+/*
+paper-button#button.style-scope.ytd-button-renderer.style-text.ssize-default yt-formatted-string {
+	color: #FFA1F1!important;
+	font-family: SF-AlienIntrudersSolid!important;
+}
+*/
+span#title {
+	color: #258EA6!important;
+	padding: 0px 2.5px!important;
+	font-family: FortySeven;
+	font-size: 4rem!important;
+	max-height: 4rem!important;
+	line-height: 4rem!important;
+	text-shadow: 2px 2px 5px #FFA1F1!important;
+}
+
+paper-button {
+	background-color: #258EA6!important;
+}
+
+div.metadata.style-scope.ytd-compact-video-renderer {
+	background-color: #258EA6!important;
+}
+
+.ytd-watch-flexy {
+	background-color: transparent!important;
+}
+
+.ytd-app {
+	background-color: transparent!important;
+}
+
+ytd-watch-flexy {
+	background-color: transparent!important;
+}
+
+ytd-app {
+	background-color: transparent!important;
+}
+
+.ytd-ad-overlay-image {
+	display: none!important;
+}
+
+.ytd-ad-overlay-image img {
+	display: none!important;
+}
+
+.ytp-ad-text-overlay {
+	display: none!important;
+}
+
+div#contentContainer.style-scope.app-drawer {
+	background-color: #258EA6!important;
+}
+
+div#container.style-scope.ytd-searchbox {
+	background-color: #258EA6!important;
+}
+
+input#search::placeholder {
+	color: #FFA1F1!important;
+}
+
+input#search {
+	border: none;
+	outline: none;
+}
+
+
+*:focus {
+	outline: 0!important;
+}
+
+#search-icon-legacy {
+	background-color: #258EA6!important;
+	outline: none;
+}
+
+#guide-links-secondary a {
+	color: #FFA1F1!important;
+  font-family: VCROSDMono!important;
+}
+
+#guide-links-primary a {
+	color: #FFA1F1!important;
+  font-family: VCROSDMono!important;
+}
+
+#copyright div {
+	color: #FFA1F1!important;
+  font-family: VCROSDMono!important;
+}
+
+#details #meta h3 {
+	font-family: SF-AlienIntrudersSolid!important;
+}
+
+#details #meta #metadata-container #metadata #byline-container yt-formatted-string {
+  font-family: VCROSDMono!important;
+}
