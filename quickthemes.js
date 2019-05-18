@@ -1,23 +1,35 @@
-window.addEventListener('load', function () {
-  if (localStorage.getItem('spotify') === null) {
-    localStorage.setItem('spotify', 'none');
-  } else {
-    console.log("Spotify theme already set.");
-  };
-  if (localStorage.getItem('youtube') === null) {
-    localStorage.setItem('youtube', 'none');
-  } else {
-    console.log("Youtube theme already set.");
-  };
+/*ONLOAD CHECK FOR SPOTIFY AND YOUTUBE*/
+window.addEventListener('load', function() {
+    chrome.storage.sync.get(['spotify', 'youtube'], function(themes) {
+      if (themes.youtube == undefined) {
+        chrome.storage.sync.set({'youtube': 'none'}, function(themes) {
+          console.log("youtube set");
+        });
+      } else {
+        console.log("Youtube theme already set in google chrome storage");
+      }
+      if (themes.spotify == undefined) {
+        chrome.storage.sync.set({'spotify': 'none'}, function(themes) {
+          console.log("spotify set");
+        });
+      } else {
+        console.log("Spotify theme already set in google chrome storage");
+      }
+    });
+
 });
+
+  chrome.storage.sync.get(['spotify', 'youtube'], function(themes) {
+    console.log(themes.youtube + " " + themes.spotify);
+  });
 
 function getPathFromUrl(url) {
   return url.split("?")[0];
 }
 
 function addCss(styleSheet) {
-  const head = document.head;
-  const link = document.createElement("link");
+  var head = document.head;
+  var link = document.createElement("link");
 
   link.type = "text/css";
   link.rel = "stylesheet";
@@ -43,69 +55,72 @@ const logStyles = [
     , 'padding: 25px'
 ].join(';');
 
-/*ONLOAD CHECK FOR SPOTIFY AND YOUTUBE*/
+
+
 window.addEventListener('load', function() {
-    if (document.URL == "https://www.youtube.com/") {
-        if (localStorage.getItem('youtube') == 'retrowave') {
-          addCss(retrowaveYoutube);
-          console.log('%c QuickThemes Loaded. Enjoy!', logStyles);
-        } else if (localStorage.getItem('youtube') == 'none') {
-          console.log('%c No Themes :O', logStyles);
-        }
-    } else if (document.URL == "https://open.spotify.com/" || "https://play.spotify.com") {
-      if (localStorage.getItem('spotify') == 'retrowave') {
-        addCss(retrowaveSpotify);
-        console.log('%c QuickThemes Loaded. Enjoy!', logStyles);
-      } else if (localStorage.getItem('spotify') == 'none') {
-        console.log('%c No Themes :O', logStyles);
+      /*YOUTUBE SPOTIFY LOAD*/
+      if (document.URL == "https://www.youtube.com/") {
+          chrome.storage.sync.get(['youtube'], function(site) {
+            if (site.youtube == 'retrowave') {
+              addCss(retrowaveYoutube);
+              console.log('%c QuickThemes Loaded. Enjoy!', logStyles);
+            } else if (site.youtube == 'none') {
+              console.log('%c No Themes :O', logStyles);
+            }
+          });
+      } else if (document.URL == "https://open.spotify.com/" || "https://play.spotify.com") {
+          chrome.storage.sync.get(['spotify'], function(site) {
+            if (site.spotify == 'retrowave') {
+              addCss(retrowaveSpotify);
+              console.log('%c QuickThemes Loaded. Enjoy!', logStyles);
+            } else if (site.spotify == 'none') {
+              console.log('%c No Themes :O', logStyles);
+            }
+          });
       }
-    }
-});
+      /*POP UP HTML*/
+      let documentNoQuery = getPathFromUrl(document.URL);
 
-/*POPUP.HTML ACTIVE CHECK + SET LOCAL STORAGE ON SUBMIT*/
-window.addEventListener('load', function() {
-  let documentNoQuery = getPathFromUrl(document.URL);
+      if (documentNoQuery == chrome.extension.getURL("popup.html")) {
+        var themeChange = document.getElementById("themeChange");
+        var youtubeThemeInput = document.getElementById("youtubeThemeInput");
+        var spotifyThemeInput = document.getElementById("spotifyThemeInput");
+        /*Sets to already set theme if set*/
+        chrome.storage.sync.get(['spotify', 'youtube'], function(items) {
+          spotifyThemeInput.value = items.spotify;
+          youtubeThemeInput.value = items.youtube;
+          console.log("Inputs set to already set values: " + items.spotify + items.youtube)
+        });
+        console.log("Popup.html detected as current page");
 
-  if (documentNoQuery == chrome.extension.getURL("popup.html")) {
-    var themeChange = document.getElementById("themeChange");
-    var youtubeThemeInput = document.getElementById("youtubeThemeInput");
-    var spotifyThemeInput = document.getElementById("spotifyThemeInput");
-    /*Sets to already set theme if set*/
-    youtubeThemeInput.value = localStorage.getItem('youtube');
-    spotifyThemeInput.value = localStorage.getItem('spotify');
-    console.log("Popup.html detected as current page");
+        themeChange.addEventListener('submit', function() {
 
-    themeChange.addEventListener('submit', function() {
-
-      if (youtubeThemeInput.value == "retrowave") {
-        localStorage.setItem('youtube', 'retrowave');
-        console.log("retrowave theme set");
-
-      } else if (youtubeThemeInput.value == 'none') {
-        localStorage.setItem('youtube', 'none');
-        console.log("none theme set");
-
+          if (youtubeThemeInput.value == "retrowave") {
+            chrome.storage.sync.set({'youtube': 'retrowave'}, function(items) {
+              console.log("youtube set to theme retrowave on form submit");
+            });
+          } else if (youtubeThemeInput.value == 'none') {
+            chrome.storage.sync.set({'youtube': 'none'}, function(items) {
+              console.log("youtube set to theme none on form submit");
+            });
+          } else {
+            console.log("ERROR: Youtube theme isnt set to a theme");
+          }
+          if (spotifyThemeInput.value == "retrowave") {
+            chrome.storage.sync.set({'spotify': 'retrowave'}, function(items) {
+              console.log("spotify set to theme retrowave on form submit" + items.spotify);
+            });
+          } else if (spotifyThemeInput.value == "none") {
+            chrome.storage.sync.set({'spotify': 'none'}, function(items) {
+              console.log("spotify set to theme none on form submit" + items.spotify);
+            });
+          } else {
+            console.log("ERROR: Spotify theme isnt set to a theme");
+          }
+        });
       } else {
-        console.log("Youtube theme isnt set to a theme");
-
+        console.log("Page not currently Popup.html");
+        console.log(document.URL);
+        console.log(chrome.extension.getURL("popup.html"));
       }
-      if (spotifyThemeInput.value == "retrowave") {
-        localStorage.setItem('spotify', 'retrowave');
-        console.log("retrowave theme set");
-
-      } else if (spotifyThemeInput.value == "none") {
-        localStorage.setItem('spotify', 'none');
-        console.log("none theme set");
-
-      } else {
-        console.log("Spotify theme isnt set to a theme");
-
-      }
-
-    });
-  } else {
-    console.log("Page not currently Popup.html");
-    console.log(document.URL);
-    console.log(chrome.extension.getURL("popup.html"));
-  }
 });
